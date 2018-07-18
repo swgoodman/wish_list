@@ -7,4 +7,14 @@ class UsersController < ApplicationController
     set :views, 'app/views'
   end
 
+  get '/login' do
+    erb :'users/login'
+  end
+
+  post '/login' do
+    #check credentials
+    #if logged_in?
+    redirect '/items'
+  end
+
 end
