@@ -1,6 +1,6 @@
 class CreateItems < ActiveRecord::Migration
   def change
-    creat_table :users do |t|
+    create_table :users do |t|
       t.string :name
       t.string :link
       t.integer :price
