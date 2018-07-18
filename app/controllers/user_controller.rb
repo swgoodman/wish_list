@@ -12,9 +12,13 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    #check credentials
-    #if logged_in?
-    redirect '/items'
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect '/items'
+    else
+      erb :'user/login'
+    end
   end
 
 end
