@@ -1,9 +1,13 @@
 
-<p> Welcome, <%= current_user.username %>
-<h2> Tweets </h2>
+<p> Welcome, <%= current_user.name %>.</p>
+<h2> Your Wish List </h2>
 
-<% @items.each do |item| %>
-  <div>
-    <%= item.name %>
-  </div>
+<% if @items.any? %>
+  <% @items.each do |item| %>
+    <div>
+      <%= item.name %>
+    </div>
+  <% end %>
+<% else %>
+  <p>Your list is empty! Click <a href="/add">here</a> to add an item.</p>
 <% end %>

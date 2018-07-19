@@ -36,7 +36,12 @@ class UsersController < ApplicationController
 
   get '/:slug/list' do
     @user = User.find_by_slug(params[:slug])
-    erb :'user/show_list'
-  end
+      if logged_in?
+        @items = Item.all
+        erb :'user/show_list'
+      else
+        redirect to '/login'
+      end
+    end
 
 end

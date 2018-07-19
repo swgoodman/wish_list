@@ -6,7 +6,4 @@ class ItemsController < ApplicationController
     set :public_folder, 'public'
     set :views, 'app/views'
   end
-
-
-
 end
