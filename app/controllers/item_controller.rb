@@ -17,10 +17,9 @@ class ItemsController < ApplicationController
   end
 
   post '/:slug/list/add' do
-  @user = User.find_by_slug(params[:slug])
   if logged_in?
     if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
-      redirect to "/#{@user.slug}/list/add"
+      redirect to "/#{current_user.slug}/list/add"
     else
       @tweet = current_user.tweets.build(content: params[:content])
       if @tweet.save

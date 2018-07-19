@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
 
-      redirect to "/#{@user.name}/list"
+      redirect to "/#{@user.slug}/list"
     else
       erb :'user/login'
     end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @user.save
       session[:user_id] = @user.id
 
-      redirect to "/#{@user.name}/list"
+      redirect to "/#{@user.slug}/list"
     end
   end
 
