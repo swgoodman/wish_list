@@ -1,11 +1,7 @@
 module Slugifiable
   module InstanceMethods
     def slug
-      if self.username?
-        self.username.gsub(" ", "-").downcase
-      else
-        self.username.gsub(" ", "-").downcase
-      end
+        self.name.gsub(" ", "-").downcase
     end
   end
 

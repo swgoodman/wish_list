@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @user.save
       session[:user_id] = @user.id
 
-      erb :':name/list'
+      redirect to '/users/:slug/list'
     end
   end
 
