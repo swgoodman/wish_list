@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
 
-      redirect to '/#{@user.username}/list'
+      redirect to '/users/#{@user.username}/list'
     else
       erb :'user/login'
     end
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     end
   end
 
-  get '/:username/list' do
+  get '/users/:slug/list' do
     if logged_in?
       @user = User.find_by_id(params[:id])
       erb :'user/show_list'
