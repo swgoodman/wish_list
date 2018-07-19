@@ -18,14 +18,17 @@ class ItemsController < ApplicationController
 
   post '/:slug/list/add' do
   if logged_in?
-    if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
+
+    if params[:name] == "" || params[:link] == "" || params[:price] == "" # || params[:category] == ""
       redirect to "/#{current_user.slug}/list/add"
     else
-      @tweet = current_user.tweets.build(content: params[:content])
-      if @tweet.save
-        redirect to "/tweets/#{@tweet.id}"
+
+      @item = current_user.item.build(name: params[:name], link: params[:link], price: params[:price])
+      @item.category_id = Category.find_or_create_by(name: params[:category][:name])
+      if @item.save
+        redirect to "/#{current_user.slug}/list"
       else
-        redirect to "/tweets/new"
+        redirect to "/#{current_user.slug}/list/add"
       end
     end
   else
