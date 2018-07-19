@@ -12,11 +12,11 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by(:username => params[:username])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+    @user = User.find_by(:username => params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
 
-      redirect '/items'
+      redirect to '/#{@user.username}/list'
     else
       erb :'user/login'
     end
@@ -30,7 +30,16 @@ class UsersController < ApplicationController
       @user.save
       session[:user_id] = @user.id
 
-      redirect '/items'
+      erb :':username/list'
+    end
+  end
+
+  get '/:username/list' do
+    if logged_in?
+      @user = User.find_by_id(params[:id])
+      erb :'user/show_list'
+    else
+      redirect to '/login'
     end
   end
 
