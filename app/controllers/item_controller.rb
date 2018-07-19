@@ -24,7 +24,7 @@ class ItemsController < ApplicationController
     else
 
       @item = current_user.item.build(name: params[:name], link: params[:link], price: params[:price])
-      @item.category_id = Category.find_or_create_by(name: params[:category][:name])
+      # @item.category_id = Category.find_or_create_by(name: params[:category][:name])
       if @item.save
         redirect to "/#{current_user.slug}/list"
       else

@@ -8,6 +8,8 @@
       <%= item.name %>
     </div>
   <% end %>
+  <br>
+  <a href="/<%=@user.slug%>/list/add">Add more stuff!</a>
 <% else %>
   <p>Your list is empty! Click <a href="/<%=@user.slug%>/list/add">here</a> to add an item.</p>
 <% end %>
