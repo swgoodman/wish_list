@@ -1,1 +1,9 @@
-create_item.erb
+
+<h2>Add Item</h2>
+<form action="/add" method="POST">
+  <p>Name: <input type="text" name="name"></p>
+  <p>Link: <input type="text" name="link"></p>
+  <p>Price: <input type="integer" name="price"></p>
+  <p>Category: <input type="string" name="category"></p>
+  <input class="btn btn-primary" type="submit" value="submit">
+</form>
