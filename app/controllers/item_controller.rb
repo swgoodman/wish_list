@@ -36,8 +36,19 @@ class ItemsController < ApplicationController
         redirect to "/#{current_user.slug}/list/add"
       end
     end
-  else
-    redirect to '/login'
+    else
+      redirect to '/login'
+    end
   end
-end
+
+  get '/*/list/:slug' do
+    if logged_in?
+      @item = Item.find_by_slug(params[:slug])
+      erb :'item/show_item'
+    else
+      redirect to "/login"
+    end
+  end
+
+
 end

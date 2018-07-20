@@ -5,7 +5,7 @@
 <% if @items.any? %>
   <% @items.each do |item| %>
     <div>
-      <%= item.name %>
+      <a href="/<%=current_user.slug%>/list/<%=item.slug%>"><%= item.name %></a>
       <%= item.link %>
       <%= item.price %>
 
