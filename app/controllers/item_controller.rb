@@ -19,12 +19,17 @@ class ItemsController < ApplicationController
   post '/:slug/list/add' do
   if logged_in?
 
-    if params[:name] == "" || params[:link] == "" || params[:price] == "" # confirm there is cat_id info
+    if params[:name] == "" || params[:link] == "" || params[:price] == ""# || params[:item[:category_id] == ""
       redirect to "/#{current_user.slug}/list/add"
     else
-
       @item = current_user.item.build(name: params[:name], link: params[:link], price: params[:price])
-      # @item.category_id = Category.find_or_create_by(name: params[:category][:name])
+
+      if params[:category][:name] == ""
+        redirect to "/#{current_user.slug}/list/add"
+      else
+        @item.category_id = Category.find_or_create_by(name: params[:category][:name])
+      end
+
       if @item.save
         redirect to "/#{current_user.slug}/list"
       else
