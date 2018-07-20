@@ -50,5 +50,19 @@ class ItemsController < ApplicationController
     end
   end
 
+  get '/*/list/:slug/edit' do
+    if logged_in?
+      @item = Item.find_by_slug(params[:slug])
+      if @item && @item.user == current_user
+        erb :'item/edit_item'
+      else
+        redirect to "/#{current_user.slug}/list"
+      end
+    else
+      redirect to "/login"
+    end
+  end
+
+
 
 end
