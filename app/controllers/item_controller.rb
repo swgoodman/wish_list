@@ -63,6 +63,21 @@ class ItemsController < ApplicationController
     end
   end
 
-
+  patch '/*/list/:slug' do
+    if logged_in?
+      @item = Item.find_by_slug(params[:slug])
+      if params[:name] == "" || params[:link] == "" || params[:price] == ""
+        redirect to "/#{current_user.slug}/list/#{@item.slug}/edit"
+      else @item && @item.user == current_user
+        if @item.update(name: params[:name], link: params[:link], price: params[:price])
+          redirect to "/#{current_user.slug}/list/#{@item.slug}"
+        else
+          redirect to "/#{current_user.slug}/list/#{@item.slug}/edit"
+        end
+      end
+    else
+      redirect to "/login"
+    end
+  end
 
 end
