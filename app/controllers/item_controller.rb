@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
   post '/:slug/list/add' do
   if logged_in?
 
-    if params[:name] == "" || params[:link] == "" || params[:price] == "" # || params[:category] == ""
+    if params[:name] == "" || params[:link] == "" || params[:price] == "" # confirm there is cat_id info
       redirect to "/#{current_user.slug}/list/add"
     else
 
