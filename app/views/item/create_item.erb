@@ -5,13 +5,13 @@
   <p>Link: <input type="text" name="link"></p>
   <p>Price: <input type="integer" name="price"></p>
   <label> Categories </label>
-    <%Category.all.each do |category|%>
+    <!-- <%Category.all.each do |category|%>
     <input type="checkbox" name="item[category_id]" id="<%= category.name %>" value="<%=category.id%>"><%=category.name%></input>
   <%end%>
 
   <br></br>
     <label>New Category:</label>
       <input  type="text" name="category[name]" id="category_name"></input>
-    <br></br>
+    <br></br> -->
   <input class="btn btn-primary" type="submit" value="submit">
 </form>
