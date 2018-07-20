@@ -1,1 +1,11 @@
-This is working
+<h1><%=@item.name%></h1>
+
+  Link:<h3><%=@item.link%></h3>
+  Price:<h3><%=@item.price%></h3>
+
+<form method="post" action="/*/list/<%=@item.slug%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Item">
+</form>
+
+<a href="/*/list/<%=@item.slug%>/delete">Edit Item </a>
