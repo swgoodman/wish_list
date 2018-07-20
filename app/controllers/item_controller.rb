@@ -80,4 +80,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  delete '/*/list/:slug/delete' do
+    if logged_in?
+      @item = Item.find_by_slug(params[:slug])
+        if @item && @item.user == current_user
+          @item.delete
+        end
+      redirect to "/#{current_user.slug}/list"
+    else
+      redirect to '/login'
+    end
+  end
+
 end
