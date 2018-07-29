@@ -2,11 +2,13 @@ require './config/environment'
 
 class ItemsController < ApplicationController
 
+# Configures location of files.
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
   end
 
+# Sign Up GET Route - Authenticates user and renders 'New' Form.
   get '/:slug/list/add' do
     if logged_in?
       @user = User.find_by_slug(params[:slug])
@@ -16,13 +18,21 @@ class ItemsController < ApplicationController
     end
   end
 
+# Sign Up GET Route - Authenticates user and renders 'New' Form.
   post '/:slug/list/add' do
+
+  # If category is empty and box is checked....create.
+    #Set params category ID and good day.
+  # If category is filled and box is unchecked....create.
+    #Create category
+  # If both are empty...start over.
+
   if logged_in?
 
     if params[:name] == "" || params[:link] == "" || params[:price] == ""
       redirect to "/#{current_user.slug}/list/add"
     else
-      @item = current_user.item.build(name: params[:name], link: params[:link], price: params[:price])
+      @item = current_user.items.build(name: params[:name], link: params[:link], price: params[:price])
 
       # if params[:category][:name] == ""
       #   redirect to "/#{current_user.slug}/list/add"
@@ -41,6 +51,7 @@ class ItemsController < ApplicationController
     end
   end
 
+#
   get '/*/list/:slug' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])

@@ -7,6 +7,6 @@ class User < ActiveRecord::Base
   extend Slugifiable::ClassMethods
   include Slugifiable::InstanceMethods
 
-  has_many :item
-  has_many :category, through: :item
+  has_many :items
+  has_many :categories, through: :items
 end

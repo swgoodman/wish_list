@@ -2,15 +2,18 @@ require './config/environment'
 
 class UsersController < ApplicationController
 
+# Configures location of files.
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
   end
 
+# Log In Get Route - Renders log in.
   get '/login' do
     erb :'user/login'
   end
 
+# Log In POST Route - Authenticates and updates session.
   post '/login' do
     @user = User.find_by(:name => params[:name])
     if @user && @user.authenticate(params[:password])
@@ -22,28 +25,32 @@ class UsersController < ApplicationController
     end
   end
 
+# Sign Up POST Route - Validates and creates new users.
   post '/signup' do
-    if params[:name] == "" || params[:email] == "" || params[:password] == ""
-      redirect to '/signup'
+    if User.find_by(:name => params[:name]) || params[:name] == "" || params[:email] == "" || params[:password] == ""
+        erb :'index'
     else
       @user = User.new(:name => params[:name], :email => params[:email], :password => params[:password])
       @user.save
+
       session[:user_id] = @user.id
 
       redirect to "/#{@user.slug}/list"
     end
   end
 
+# List GET - Authenticates and renders users wish list overview
   get '/:slug/list' do
-    @user = User.find_by_slug(params[:slug])
+    @user = current_user
       if logged_in?
-        @items = Item.all
+        @items = current_user.items.all
         erb :'user/show_list'
       else
         redirect to '/login'
       end
     end
 
+# Log Out GET - Clears the session and logs out.
   get '/logout' do
     if logged_in?
       session.destroy
