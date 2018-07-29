@@ -21,24 +21,14 @@ class ItemsController < ApplicationController
 # Sign Up GET Route - Authenticates user and renders 'New' Form.
   post '/:slug/list/add' do
 
-  # If category is empty and box is checked....create.
-    #Set params category ID and good day.
-  # If category is filled and box is unchecked....create.
-    #Create category
-  # If both are empty...start over.
+      if logged_in?
 
-  if logged_in?
+        if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
+          redirect to "/#{current_user.slug}/list/add"
 
-    if params[:name] == "" || params[:link] == "" || params[:price] == ""
-      redirect to "/#{current_user.slug}/list/add"
-    else
-      @item = current_user.items.build(name: params[:name], link: params[:link], price: params[:price])
-
-      # if params[:category][:name] == ""
-      #   redirect to "/#{current_user.slug}/list/add"
-      # else
-      #   @item.category_id = Category.find_or_create_by(name: params[:category][:name])
-      # end
+      else
+        @category = Category.find_or_create_by(name: params[:category])
+        @item = current_user.items.build(name: params[:name], link: params[:link], price: params[:price], category: @category)
 
       if @item.save
         redirect to "/#{current_user.slug}/list"

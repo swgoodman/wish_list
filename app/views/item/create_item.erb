@@ -4,16 +4,18 @@
   <p>Name: <input type="text" name="name"></p>
   <p>Link: <input type="text" name="link"></p>
   <p>Price: <input type="integer" name="price"></p>
-  <!---Render the existing check boxes and text field. -->
+  <p>Category:
+    <input type="text" list="categories" name="category">
+    <datalist id="categories">
+      <% current_user.categories.each do |category| %>
 
-  <!-- <label> Categories </label> -->
-    <!-- <%Category.all.each do |category|%>
-    <input type="checkbox" name="item[category_id]" id="<%= category.name %>" value="<%=category.id%>"><%=category.name%></input>
-  <%end%>
+      <option><%=category.name%></option>
 
-  <br></br>
-    <label>New Category:</label>
-      <input  type="text" name="category[name]" id="category_name"></input>
-    <br></br> -->
+      <% end %>
+
+    </datalist>
+  </p>
+
+  <br>
   <input class="btn btn-primary" type="submit" value="submit">
 </form>
