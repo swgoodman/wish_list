@@ -1,21 +1,23 @@
-
 <h2>Add Item</h2>
-<form action="/:slug/list/add" method="POST">
-  <p>Name: <input type="text" name="name"></p>
-  <p>Link: <input type="text" name="link"></p>
-  <p>Price: <input type="integer" name="price"></p>
-  <p>Category:
-    <input type="text" list="categories" name="category">
-    <datalist id="categories">
-      <% current_user.categories.each do |category| %>
 
-      <option><%=category.name%></option>
+<!-- Create Form. -->
+  <form action="/:slug/list/add" method="POST">
+    <p>Name: <input type="text" name="name"></p>
 
-      <% end %>
+    <p>Link: <input type="text" name="link"></p>
 
-    </datalist>
-  </p>
+    <p>Price: <input type="integer" name="price"></p>
 
-  <br>
-  <input class="btn btn-primary" type="submit" value="submit">
-</form>
+    <p>Category:
+      <input type="text" list="categories" name="category">
+      <datalist id="categories">
+        <% current_user.categories.each do |category| %>
+          <option><%=category.name%></option>
+          <% end %>
+        </datalist>
+      </p>
+
+      <br>
+
+      <input class="btn btn-primary" type="submit" value="submit">
+    </form>

@@ -2,20 +2,23 @@
 <p> Welcome, <%= current_user.name %>.</p>
 <h2> Your Wish List </h2>
 
-<% if @items.any? %>
-  <% @items.each do |item| %>
-    <div>
-      <a href="/<%=current_user.slug%>/list/<%=item.slug%>"><%= item.name %></a> |
-      Price: $<%= item.price %> |
-      <a href="<%= item.link %>">Buy Now!</a>
+<!-- List items. -->
+  <% if @items.any? %>
+    <% @items.each do |item| %>
+      <div>
+        <a href="/<%=current_user.slug%>/list/<%=item.slug%>"><%= item.name %></a> |
+        Price: $<%= item.price %> |
+        <a href="<%= item.link %>">Buy Now!</a>
+      </div>
+    <% end %>
+    <br>
+    <a href="/<%=@user.slug%>/list/add">Add more stuff!</a>
 
-    </div>
+  <% else %>
+    <p>Your list is empty! Click <a href="/<%=@user.slug%>/list/add">here</a> to add an item.</p>
   <% end %>
+
   <br>
-  <a href="/<%=@user.slug%>/list/add">Add more stuff!</a>
-<% else %>
-  <p>Your list is empty! Click <a href="/<%=@user.slug%>/list/add">here</a> to add an item.</p>
-<% end %>
-<br>
-<br>
-<a href="/logout">Log Out</a>
+  <br>
+<!-- Log out. -->
+  <a href="/logout">Log Out</a>
