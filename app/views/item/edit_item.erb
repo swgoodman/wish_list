@@ -11,7 +11,7 @@
   <form method="post" action="/<%=current_user.slug%>/list/<%=@item.slug%>">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-    <p>Name: <input type="text" name="name" value="<%= @item.name %>"></p>
+    <p>Username: <input type="text" name="name" value="<%= @item.name %>"></p>
 
     <p>Link: <input type="text" name="link" value="<%= @item.link %>"></p>
 
