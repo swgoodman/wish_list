@@ -20,22 +20,19 @@ class ItemsController < ApplicationController
 
 # Sign Up GET Route - Authenticates user and renders 'New' Form.
   post '/:slug/list/add' do
-
-      if logged_in?
-
-        if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
-          redirect to "/#{current_user.slug}/list/add"
-
+    if logged_in?
+      if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
+        redirect to "/#{current_user.slug}/list/add"
       else
         @category = Category.find_or_create_by(name: params[:category])
         @item = current_user.items.build(name: params[:name], link: params[:link], price: params[:price], category_id: @category.id)
 
-      if @item.save
-        redirect to "/#{current_user.slug}/list"
-      else
-        redirect to "/#{current_user.slug}/list/add"
+        if @item.save
+          redirect to "/#{current_user.slug}/list"
+        else
+          redirect to "/#{current_user.slug}/list/add"
+        end
       end
-    end
     else
       redirect to '/login'
     end
@@ -83,14 +80,14 @@ class ItemsController < ApplicationController
     end
   end
 
-# Delete Item POST Route - Confirms user and deletes item from DB. 
+# Delete Item POST Route - Confirms user and deletes item from DB.
   delete '/*/list/:slug/delete' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])
         if @item && @item.user == current_user
           @item.delete
+          redirect to "/#{current_user.slug}/list"
         end
-      redirect to "/#{current_user.slug}/list"
     else
       redirect to '/login'
     end
