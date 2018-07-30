@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
     end
   end
 
-#
+# Show Item GET Route - Shows item details with links to Edit or Delete.
   get '/*/list/:slug' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])
@@ -51,6 +51,7 @@ class ItemsController < ApplicationController
     end
   end
 
+#Edit Item GET Route - Renders edit form.
   get '/*/list/:slug/edit' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])
@@ -64,6 +65,7 @@ class ItemsController < ApplicationController
     end
   end
 
+#Edit Item PATCH Route - Accepts updated item params and updates item details.
   patch '/*/list/:slug' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])
@@ -81,6 +83,7 @@ class ItemsController < ApplicationController
     end
   end
 
+# Delete Item POST Route - Confirms user and deletes item from DB. 
   delete '/*/list/:slug/delete' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])

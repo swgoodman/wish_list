@@ -11,10 +11,12 @@ class ApplicationController < Sinatra::Base
     set :session_secret, "talk_the_talk"
   end
 
+# Index GET Route - Renders 'Home' page.
   get "/" do
     erb :index
   end
 
+# Helper methods - Authenticate current users.
   helpers do
 
     def logged_in?
