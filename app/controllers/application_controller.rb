@@ -2,6 +2,7 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
+# Configures location of files.
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
