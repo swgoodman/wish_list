@@ -1,5 +1,12 @@
 <h2>Add Item</h2>
 
+<!-- Display flash messages. -->
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+  <br>
+  <br>
+
 <!-- Create Form. -->
   <form action="/:slug/list/add" method="POST">
     <p>Name: <input type="text" name="name"></p>
@@ -21,3 +28,7 @@
 
       <input class="btn btn-primary" type="submit" value="submit">
     </form>
+
+    <br>
+
+    <a href="/<%=current_user.slug%>/list">Back to list.</a>

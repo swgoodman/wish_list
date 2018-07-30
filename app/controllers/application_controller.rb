@@ -1,6 +1,9 @@
+require 'rack-flash'
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
+
+  use Rack::Flash
 
 # Configures location of files.
   configure do

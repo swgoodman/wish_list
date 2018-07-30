@@ -1,6 +1,10 @@
+require 'rack-flash'
 require './config/environment'
 
+
 class ItemsController < ApplicationController
+
+  use Rack::Flash, :sweep => true
 
 # Configures location of files.
   configure do
@@ -22,14 +26,17 @@ class ItemsController < ApplicationController
   post '/:slug/list/add' do
     if logged_in?
       if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
+        flash[:message] = "There was an error. Please make sure all fields are filled out."
         redirect to "/#{current_user.slug}/list/add"
       else
         @category = Category.find_or_create_by(name: params[:category])
         @item = current_user.items.build(name: params[:name], link: params[:link], price: params[:price], category_id: @category.id)
 
         if @item.save
+          flash[:message] = "Successfully created item."
           redirect to "/#{current_user.slug}/list"
         else
+          flash[:message] = "There was an error. Please make sure all fields are filled out."
           redirect to "/#{current_user.slug}/list/add"
         end
       end
@@ -66,12 +73,15 @@ class ItemsController < ApplicationController
   patch '/*/list/:slug' do
     if logged_in?
       @item = Item.find_by_slug(params[:slug])
-      if params[:name] == "" || params[:link] == "" || params[:price] == ""
+      if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
+        flash[:message] = "There was an error. Please make sure all fields are filled out."
         redirect to "/#{current_user.slug}/list/#{@item.slug}/edit"
       else @item && @item.user == current_user
         if @item.update(name: params[:name], link: params[:link], price: params[:price])
+          flash[:message] = "Successfully edited item."
           redirect to "/#{current_user.slug}/list/#{@item.slug}"
         else
+          flash[:message] = "There was an error. Please make sure all fields are filled out."
           redirect to "/#{current_user.slug}/list/#{@item.slug}/edit"
         end
       end
@@ -86,6 +96,7 @@ class ItemsController < ApplicationController
       @item = Item.find_by_slug(params[:slug])
         if @item && @item.user == current_user
           @item.delete
+          flash[:message] = "Successfully deleted item."
           redirect to "/#{current_user.slug}/list"
         end
     else

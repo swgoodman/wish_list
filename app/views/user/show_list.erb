@@ -2,6 +2,13 @@
 <p> Welcome, <%= current_user.name %>.</p>
 <h2> Your Wish List </h2>
 
+
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+  <br>
+  <br>
+
 <!-- List items. -->
   <% if @items.any? %>
     <% @items.each do |item| %>
@@ -10,6 +17,7 @@
         Price: $<%= item.price %> |
         <a href="<%= item.link %>">Buy Now!</a>
       </div>
+      <br>
     <% end %>
     <br>
     <a href="/<%=@user.slug%>/list/add">Add more stuff!</a>

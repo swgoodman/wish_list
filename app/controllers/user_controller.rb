@@ -1,6 +1,9 @@
+require 'rack-flash'
 require './config/environment'
 
 class UsersController < ApplicationController
+
+  use Rack::Flash
 
 # Configures location of files.
   configure do
@@ -27,11 +30,14 @@ class UsersController < ApplicationController
 # Sign Up POST Route - Validates and creates new users.
   post '/signup' do
     if User.find_by(:name => params[:name]) || params[:name] == "" || params[:email] == "" || params[:password] == ""
-        erb :'index'
+      flash[:message] = "There was an error. Please make sure all fields are filled out."
+      erb :'index'
     else
       @user = User.new(:name => params[:name], :email => params[:email], :password => params[:password])
       @user.save
       session[:user_id] = @user.id
+
+      flash[:message] = "Welcome to Wish List!"
       redirect to "/#{@user.slug}/list"
     end
   end
