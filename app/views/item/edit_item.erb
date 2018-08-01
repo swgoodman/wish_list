@@ -11,7 +11,7 @@
   <form method="post" action="/<%=current_user.slug%>/list/<%=@item.slug%>">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
 
-    <p>Username: <input type="text" name="name" value="<%= @item.name %>"></p>
+    <p>Name: <input type="text" name="name" value="<%= @item.name %>"></p>
 
     <p>Link: <input type="text" name="link" value="<%= @item.link %>"></p>
 
@@ -21,7 +21,7 @@
       <input type="text" list="categories" name="category" value="<%=@item.category.name%>">
       <datalist id="categories">
         <% @item.user.categories.each do |category| %>
-          <option><%=category.name%></option>
+          <option value="<%=category.name%>">
           <% end %>
         </datalist>
       </p>

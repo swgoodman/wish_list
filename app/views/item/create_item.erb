@@ -9,7 +9,7 @@
 
 <!-- Create Form. -->
   <form action="/:slug/list/add" method="POST">
-    <p>Username: <input type="text" name="name"></p>
+    <p>Name: <input type="text" name="name"></p>
 
     <p>Link: <input type="text" name="link"></p>
 
@@ -19,7 +19,7 @@
       <input type="text" list="categories" name="category">
       <datalist id="categories">
         <% current_user.categories.each do |category| %>
-          <option><%=category.name%></option>
+          <option value="<%=category.name%>">
           <% end %>
         </datalist>
       </p>
