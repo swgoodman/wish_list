@@ -18,7 +18,7 @@
     <p>Category:
       <input type="text" list="categories" name="category">
       <datalist id="categories">
-        <% current_user.categories.each do |category| %>
+        <% current_user.categories.uniq.each do |category| %>
           <option value="<%=category.name%>">
           <% end %>
         </datalist>

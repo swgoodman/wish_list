@@ -1,9 +1,12 @@
 <h1><%=@item.name%></h1>
 
 <!-- Item info. -->
-  Link:<h3><%=@item.link%></h3>
+  <h3><a href="<%= @item.link %>"><%=@item.link%></a></h3>
+  
   Price:<h3><%=@item.price%></h3>
   Category:<h3><%=@item.category.name%></h3>
+
+  <br>
 
 <!-- Delete item. -->
   <form method="post" action="/*/list/<%=@item.slug%>/delete">
@@ -11,9 +14,12 @@
     <input type="submit" value="Delete Item">
   </form>
 
+  <br>
+
 <!-- Edit item link. -->
   <a href="/<%=current_user.slug%>/list/<%=@item.slug%>/edit">Edit Item </a>
 
+  <br>
   <br>
 
 <!-- Back to list. -->

@@ -20,7 +20,7 @@
     <p>Category:
       <input type="text" list="categories" name="category" value="<%=@item.category.name%>">
       <datalist id="categories">
-        <% @item.user.categories.each do |category| %>
+        <% @item.user.categories.uniq.each do |category| %>
           <option value="<%=category.name%>">
           <% end %>
         </datalist>
