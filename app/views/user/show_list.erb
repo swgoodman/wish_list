@@ -1,0 +1,31 @@
+
+<p> Welcome, <%= current_user.name %>.</p>
+<h2> Your Wish List </h2>
+
+
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+  <br>
+  <br>
+
+<!-- List items. -->
+  <% if @items.any? %>
+    <% @items.each do |item| %>
+      <div>
+        <a href="/<%=current_user.slug%>/list/<%=item.slug%>"><%= item.name %></a> |
+        Price: $<%= item.price %>
+      </div>
+      <br>
+    <% end %>
+    <br>
+    <a href="/<%=@user.slug%>/list/add">Add more stuff!</a>
+
+  <% else %>
+    <p>Your list is empty! Click <a href="/<%=@user.slug%>/list/add">here</a> to add an item.</p>
+  <% end %>
+
+  <br>
+  <br>
+<!-- Log out. -->
+  <a href="/logout">Log Out</a>

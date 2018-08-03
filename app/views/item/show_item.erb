@@ -1,0 +1,26 @@
+<h1><%=@item.name%></h1>
+
+<!-- Item info. -->
+  <h3><%=@item.link%></h3>
+
+  Price:<h3><%=@item.price%></h3>
+  Category:<h3><%=@item.category.name%></h3>
+
+  <br>
+
+<!-- Delete item. -->
+  <form method="post" action="/*/list/<%=@item.slug%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Item">
+  </form>
+
+  <br>
+
+<!-- Edit item link. -->
+  <a href="/<%=current_user.slug%>/list/<%=@item.slug%>/edit">Edit Item </a>
+
+  <br>
+  <br>
+
+<!-- Back to list. -->
+  <a href="/<%=current_user.slug%>/list">Back to list.</a>
