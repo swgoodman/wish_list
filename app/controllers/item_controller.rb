@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
 # Sign Up GET Route - Authenticates user and renders 'New' Form.
   post '/:slug/list/add' do
     if logged_in?
-      if params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
+      if Item.find_by_slug(params[:name].gsub(" ", "-").downcase) || params[:name] == "" || params[:link] == "" || params[:price] == "" || params[:category] == ""
         flash[:message] = "There was an error. Please make sure all fields are filled out."
         redirect to "/#{current_user.slug}/list/add"
       else

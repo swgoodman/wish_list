@@ -2,7 +2,7 @@ require_relative "concerns/slugifiable.rb"
 
 class User < ActiveRecord::Base
 
-# Actives bcrypt(gem) password encryption.
+# Activerecord macro that uses bcrypt(gem) password encryption.
   has_secure_password
 
 # Gives class 'Slug' functionality.
