@@ -14,8 +14,7 @@
     <% @items.each do |item| %>
       <div>
         <a href="/<%=current_user.slug%>/list/<%=item.slug%>"><%= item.name %></a> |
-        Price: $<%= item.price %> |
-        <a href="<%= item.link %>">Buy Now!</a>
+        Price: $<%= item.price %>
       </div>
       <br>
     <% end %>
