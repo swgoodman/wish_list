@@ -77,7 +77,8 @@ class ItemsController < ApplicationController
         flash[:message] = "There was an error. Please make sure all fields are filled out."
         redirect to "/#{current_user.slug}/list/#{@item.slug}/edit"
       else @item && @item.user == current_user
-        if @item.update(name: params[:name], link: params[:link], price: params[:price])
+        @category = Category.find_or_create_by(name: params[:category])
+        if @item.update(name: params[:name], link: params[:link], price: params[:price], category_id: @category.id)
           flash[:message] = "Successfully edited item."
           redirect to "/#{current_user.slug}/list/#{@item.slug}"
         else
